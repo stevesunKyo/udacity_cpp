@@ -14,30 +14,27 @@ Process::Process(int pid){
 // constructor of class pid. initialize the variables.
 
 // calculate cpu utilization of a process
-  long uptime = LinuxParser::UpTime(_pid);
-  long total_time, start_time;
+  long uptime = LinuxParser::UpTime();
+  long total_time, start_time, utime, stime, cutime, cstime;
   double cpuu= 0.0;
   string value, line;
-  std::ifstream filestream("/proc/[" + to_string(_pid) + "]/stat");
+  std::ifstream filestream("/proc/" + to_string(_pid) + "/stat");
   if (filestream.is_open()){
   std::getline(filestream, line);
   std::istringstream linestream(line);
-  for (int i = 0; i < 30; i++){
-  linestream >> value;
-    switch(i){
-      case 13:
-        total_time = total_time + stol(value);
-      case 14:
-        total_time = total_time + stol(value);
-      case 15:
-        total_time = total_time + stol(value);
-      case 16:
-        total_time = total_time + stol(value);
-      case 21:
-        start_time = stol(value);
-    	break;}
+  int count = 0;
+  while (linestream >> value){
+  count ++;
+  if (count == 14){utime = stol(value);}
+  else if (count == 15) {stime = stol(value);}
+  else if (count == 16) {cutime = stol(value);}
+  else if (count == 17) {cstime = stol(value);}
+  else if (count == 22) {start_time = stol(value);}
   }
-  cpuu = 100*(double)total_time/((double)uptime*sysconf(_SC_CLK_TCK)-(double)start_time);
+  total_time = stime + utime + cutime + cstime;
+  double total_time_hz = ((double)total_time/sysconf(_SC_CLK_TCK));
+  double seconds = ((double)uptime-((double)start_time/sysconf(_SC_CLK_TCK)));
+  cpuu = total_time_hz/seconds;
   } 
   
 _pid = pid;

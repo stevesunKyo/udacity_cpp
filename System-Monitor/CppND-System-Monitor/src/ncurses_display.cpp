@@ -7,7 +7,8 @@
 #include "format.h"
 #include "ncurses_display.h"
 #include "system.h"
-
+#include "linux_parser.h"
+#include "processor.h"
 using std::string;
 using std::to_string;
 
@@ -52,6 +53,46 @@ void NCursesDisplay::DisplaySystem(System& system, WINDOW* window) {
   wrefresh(window);
 }
 
+/*
+// I tried to modify this function to display all cpu cores.
+// However, it get a segmentation fault after I run the compiled file.
+void NCursesDisplay::DisplaySystem(System& system, WINDOW* window) {
+  int row{0};
+  mvwprintw(window, ++row, 2, ("OS: " + system.OperatingSystem()).c_str());
+  mvwprintw(window, ++row, 2, ("Kernel: " + system.Kernel()).c_str());
+  
+  std::vector<string> cpunames = system.Cpu().Cpu_Name();
+  std::vector<float> cpuutil_all = system.Cpu().Utilization_each();
+  int cpuname_size = cpunames.size();
+  for (int i = 0; i < cpuname_size; i++){
+  if (i == 0 ){mvwprintw(window, ++row, 2, ("CPU total: "));}
+  else {
+    std::string label = "CPU" + to_string(i) + ": "; 
+    mvwprintw(window, ++row, 2, label);} // Actrually, not working and get an error.
+  wattron(window, COLOR_PAIR(1));
+  mvwprintw(window, row, 10, "");
+  wprintw(window, ProgressBar(cpuutil_all[i]).c_str());
+  wattroff(window, COLOR_PAIR(1));
+  }
+
+  mvwprintw(window, ++row, 2, "Memory: ");
+  wattron(window, COLOR_PAIR(1));
+  mvwprintw(window, row, 10, "");
+  wprintw(window, ProgressBar(system.MemoryUtilization()).c_str());
+  wattroff(window, COLOR_PAIR(1));
+  mvwprintw(window, ++row, 2,
+            ("Total Processes: " + to_string(system.TotalProcesses())).c_str());
+  mvwprintw(
+      window, ++row, 2,
+      ("Running Processes: " + to_string(system.RunningProcesses())).c_str());
+  mvwprintw(window, ++row, 2,
+            ("Up Time: " + Format::ElapsedTime(system.UpTime())).c_str());
+  wrefresh(window);
+}
+*/
+
+
+
 void NCursesDisplay::DisplayProcesses(std::vector<Process>& processes,
                                       WINDOW* window, int n) {
   int row{0};
@@ -70,7 +111,6 @@ void NCursesDisplay::DisplayProcesses(std::vector<Process>& processes,
   mvwprintw(window, row, command_column, "COMMAND");
   wattroff(window, COLOR_PAIR(2));
   for (int i = 0; i < n; ++i) {
-    //You need to take care of the fact that the cpu utilization has already been multiplied by 100.
     // Clear the line
     mvwprintw(window, ++row, pid_column, (string(window->_maxx-2, ' ').c_str()));
     

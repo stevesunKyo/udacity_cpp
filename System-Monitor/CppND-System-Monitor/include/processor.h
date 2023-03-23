@@ -10,7 +10,8 @@ using std::vector;
 class Processor {
  public:
   float Utilization();
-
+  std::vector<float> Utilization_each();
+  std::vector<string> Cpu_Name();
  private:
 
 };
