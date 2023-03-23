@@ -1,7 +1,8 @@
 # CppND-System-Monitor
 
-This is a Object Oriented Linux system monitor.
-Second project in the Object Oriented Programming Course of the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). 
+This is a Linux system monitor based on object oriented programming.
+
+This is the second project in the Object Oriented Programming Course of the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). 
 
 ![System Monitor](images/monitor.png)
 
