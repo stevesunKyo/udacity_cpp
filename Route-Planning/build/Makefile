@@ -48,70 +48,13 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/workspace/CppND-Route-Planning-Project
+CMAKE_SOURCE_DIR = /home/workspace/CppND-System-Monitor
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/workspace/CppND-Route-Planning-Project/build
+CMAKE_BINARY_DIR = /home/workspace/CppND-System-Monitor/build
 
 #=============================================================================
 # Targets provided globally by CMake.
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/local/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/local/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -124,11 +67,22 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/CppND-Route-Planning-Project/build/CMakeFiles /home/workspace/CppND-Route-Planning-Project/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/CppND-System-Monitor/build/CMakeFiles /home/workspace/CppND-System-Monitor/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/CppND-Route-Planning-Project/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/workspace/CppND-System-Monitor/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -157,108 +111,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named route_planner
+# Target rules for targets named monitor
 
 # Build rule for target.
-route_planner: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 route_planner
-.PHONY : route_planner
+monitor: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 monitor
+.PHONY : monitor
 
 # fast build rule for target.
-route_planner/fast:
-	$(MAKE) -f CMakeFiles/route_planner.dir/build.make CMakeFiles/route_planner.dir/build
-.PHONY : route_planner/fast
+monitor/fast:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/build
+.PHONY : monitor/fast
 
-#=============================================================================
-# Target rules for targets named test
+src/format.o: src/format.cpp.o
 
-# Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test
-.PHONY : test
+.PHONY : src/format.o
 
-# fast build rule for target.
-test/fast:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
+# target to build an object file
+src/format.cpp.o:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/format.cpp.o
+.PHONY : src/format.cpp.o
 
-#=============================================================================
-# Target rules for targets named OSM_A_star_search
+src/format.i: src/format.cpp.i
 
-# Build rule for target.
-OSM_A_star_search: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 OSM_A_star_search
-.PHONY : OSM_A_star_search
+.PHONY : src/format.i
 
-# fast build rule for target.
-OSM_A_star_search/fast:
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/build
-.PHONY : OSM_A_star_search/fast
+# target to preprocess a source file
+src/format.cpp.i:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/format.cpp.i
+.PHONY : src/format.cpp.i
 
-#=============================================================================
-# Target rules for targets named pugixml
+src/format.s: src/format.cpp.s
 
-# Build rule for target.
-pugixml: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pugixml
-.PHONY : pugixml
+.PHONY : src/format.s
 
-# fast build rule for target.
-pugixml/fast:
-	$(MAKE) -f thirdparty/pugixml/CMakeFiles/pugixml.dir/build.make thirdparty/pugixml/CMakeFiles/pugixml.dir/build
-.PHONY : pugixml/fast
+# target to generate assembly for a file
+src/format.cpp.s:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/format.cpp.s
+.PHONY : src/format.cpp.s
 
-#=============================================================================
-# Target rules for targets named gmock_main
+src/linux_parser.o: src/linux_parser.cpp.o
 
-# Build rule for target.
-gmock_main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gmock_main
-.PHONY : gmock_main
+.PHONY : src/linux_parser.o
 
-# fast build rule for target.
-gmock_main/fast:
-	$(MAKE) -f thirdparty/googletest/googlemock/CMakeFiles/gmock_main.dir/build.make thirdparty/googletest/googlemock/CMakeFiles/gmock_main.dir/build
-.PHONY : gmock_main/fast
+# target to build an object file
+src/linux_parser.cpp.o:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/linux_parser.cpp.o
+.PHONY : src/linux_parser.cpp.o
 
-#=============================================================================
-# Target rules for targets named gmock
+src/linux_parser.i: src/linux_parser.cpp.i
 
-# Build rule for target.
-gmock: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gmock
-.PHONY : gmock
+.PHONY : src/linux_parser.i
 
-# fast build rule for target.
-gmock/fast:
-	$(MAKE) -f thirdparty/googletest/googlemock/CMakeFiles/gmock.dir/build.make thirdparty/googletest/googlemock/CMakeFiles/gmock.dir/build
-.PHONY : gmock/fast
+# target to preprocess a source file
+src/linux_parser.cpp.i:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/linux_parser.cpp.i
+.PHONY : src/linux_parser.cpp.i
 
-#=============================================================================
-# Target rules for targets named gtest_main
+src/linux_parser.s: src/linux_parser.cpp.s
 
-# Build rule for target.
-gtest_main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gtest_main
-.PHONY : gtest_main
+.PHONY : src/linux_parser.s
 
-# fast build rule for target.
-gtest_main/fast:
-	$(MAKE) -f thirdparty/googletest/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make thirdparty/googletest/googlemock/gtest/CMakeFiles/gtest_main.dir/build
-.PHONY : gtest_main/fast
-
-#=============================================================================
-# Target rules for targets named gtest
-
-# Build rule for target.
-gtest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gtest
-.PHONY : gtest
-
-# fast build rule for target.
-gtest/fast:
-	$(MAKE) -f thirdparty/googletest/googlemock/gtest/CMakeFiles/gtest.dir/build.make thirdparty/googletest/googlemock/gtest/CMakeFiles/gtest.dir/build
-.PHONY : gtest/fast
+# target to generate assembly for a file
+src/linux_parser.cpp.s:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/linux_parser.cpp.s
+.PHONY : src/linux_parser.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -266,7 +183,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/main.cpp.o
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -275,7 +192,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/main.cpp.i
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -284,152 +201,116 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/main.cpp.s
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/model.o: src/model.cpp.o
+src/ncurses_display.o: src/ncurses_display.cpp.o
 
-.PHONY : src/model.o
-
-# target to build an object file
-src/model.cpp.o:
-	$(MAKE) -f CMakeFiles/route_planner.dir/build.make CMakeFiles/route_planner.dir/src/model.cpp.o
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/model.cpp.o
-.PHONY : src/model.cpp.o
-
-src/model.i: src/model.cpp.i
-
-.PHONY : src/model.i
-
-# target to preprocess a source file
-src/model.cpp.i:
-	$(MAKE) -f CMakeFiles/route_planner.dir/build.make CMakeFiles/route_planner.dir/src/model.cpp.i
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/model.cpp.i
-.PHONY : src/model.cpp.i
-
-src/model.s: src/model.cpp.s
-
-.PHONY : src/model.s
-
-# target to generate assembly for a file
-src/model.cpp.s:
-	$(MAKE) -f CMakeFiles/route_planner.dir/build.make CMakeFiles/route_planner.dir/src/model.cpp.s
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/model.cpp.s
-.PHONY : src/model.cpp.s
-
-src/render.o: src/render.cpp.o
-
-.PHONY : src/render.o
+.PHONY : src/ncurses_display.o
 
 # target to build an object file
-src/render.cpp.o:
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/render.cpp.o
-.PHONY : src/render.cpp.o
+src/ncurses_display.cpp.o:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/ncurses_display.cpp.o
+.PHONY : src/ncurses_display.cpp.o
 
-src/render.i: src/render.cpp.i
+src/ncurses_display.i: src/ncurses_display.cpp.i
 
-.PHONY : src/render.i
+.PHONY : src/ncurses_display.i
 
 # target to preprocess a source file
-src/render.cpp.i:
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/render.cpp.i
-.PHONY : src/render.cpp.i
+src/ncurses_display.cpp.i:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/ncurses_display.cpp.i
+.PHONY : src/ncurses_display.cpp.i
 
-src/render.s: src/render.cpp.s
+src/ncurses_display.s: src/ncurses_display.cpp.s
 
-.PHONY : src/render.s
+.PHONY : src/ncurses_display.s
 
 # target to generate assembly for a file
-src/render.cpp.s:
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/render.cpp.s
-.PHONY : src/render.cpp.s
+src/ncurses_display.cpp.s:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/ncurses_display.cpp.s
+.PHONY : src/ncurses_display.cpp.s
 
-src/route_model.o: src/route_model.cpp.o
+src/process.o: src/process.cpp.o
 
-.PHONY : src/route_model.o
+.PHONY : src/process.o
 
 # target to build an object file
-src/route_model.cpp.o:
-	$(MAKE) -f CMakeFiles/route_planner.dir/build.make CMakeFiles/route_planner.dir/src/route_model.cpp.o
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/route_model.cpp.o
-.PHONY : src/route_model.cpp.o
+src/process.cpp.o:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/process.cpp.o
+.PHONY : src/process.cpp.o
 
-src/route_model.i: src/route_model.cpp.i
+src/process.i: src/process.cpp.i
 
-.PHONY : src/route_model.i
+.PHONY : src/process.i
 
 # target to preprocess a source file
-src/route_model.cpp.i:
-	$(MAKE) -f CMakeFiles/route_planner.dir/build.make CMakeFiles/route_planner.dir/src/route_model.cpp.i
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/route_model.cpp.i
-.PHONY : src/route_model.cpp.i
+src/process.cpp.i:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/process.cpp.i
+.PHONY : src/process.cpp.i
 
-src/route_model.s: src/route_model.cpp.s
+src/process.s: src/process.cpp.s
 
-.PHONY : src/route_model.s
+.PHONY : src/process.s
 
 # target to generate assembly for a file
-src/route_model.cpp.s:
-	$(MAKE) -f CMakeFiles/route_planner.dir/build.make CMakeFiles/route_planner.dir/src/route_model.cpp.s
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/route_model.cpp.s
-.PHONY : src/route_model.cpp.s
+src/process.cpp.s:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/process.cpp.s
+.PHONY : src/process.cpp.s
 
-src/route_planner.o: src/route_planner.cpp.o
+src/processor.o: src/processor.cpp.o
 
-.PHONY : src/route_planner.o
+.PHONY : src/processor.o
 
 # target to build an object file
-src/route_planner.cpp.o:
-	$(MAKE) -f CMakeFiles/route_planner.dir/build.make CMakeFiles/route_planner.dir/src/route_planner.cpp.o
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/route_planner.cpp.o
-.PHONY : src/route_planner.cpp.o
+src/processor.cpp.o:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/processor.cpp.o
+.PHONY : src/processor.cpp.o
 
-src/route_planner.i: src/route_planner.cpp.i
+src/processor.i: src/processor.cpp.i
 
-.PHONY : src/route_planner.i
+.PHONY : src/processor.i
 
 # target to preprocess a source file
-src/route_planner.cpp.i:
-	$(MAKE) -f CMakeFiles/route_planner.dir/build.make CMakeFiles/route_planner.dir/src/route_planner.cpp.i
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/route_planner.cpp.i
-.PHONY : src/route_planner.cpp.i
+src/processor.cpp.i:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/processor.cpp.i
+.PHONY : src/processor.cpp.i
 
-src/route_planner.s: src/route_planner.cpp.s
+src/processor.s: src/processor.cpp.s
 
-.PHONY : src/route_planner.s
+.PHONY : src/processor.s
 
 # target to generate assembly for a file
-src/route_planner.cpp.s:
-	$(MAKE) -f CMakeFiles/route_planner.dir/build.make CMakeFiles/route_planner.dir/src/route_planner.cpp.s
-	$(MAKE) -f CMakeFiles/OSM_A_star_search.dir/build.make CMakeFiles/OSM_A_star_search.dir/src/route_planner.cpp.s
-.PHONY : src/route_planner.cpp.s
+src/processor.cpp.s:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/processor.cpp.s
+.PHONY : src/processor.cpp.s
 
-test/utest_rp_a_star_search.o: test/utest_rp_a_star_search.cpp.o
+src/system.o: src/system.cpp.o
 
-.PHONY : test/utest_rp_a_star_search.o
+.PHONY : src/system.o
 
 # target to build an object file
-test/utest_rp_a_star_search.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/utest_rp_a_star_search.cpp.o
-.PHONY : test/utest_rp_a_star_search.cpp.o
+src/system.cpp.o:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/system.cpp.o
+.PHONY : src/system.cpp.o
 
-test/utest_rp_a_star_search.i: test/utest_rp_a_star_search.cpp.i
+src/system.i: src/system.cpp.i
 
-.PHONY : test/utest_rp_a_star_search.i
+.PHONY : src/system.i
 
 # target to preprocess a source file
-test/utest_rp_a_star_search.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/utest_rp_a_star_search.cpp.i
-.PHONY : test/utest_rp_a_star_search.cpp.i
+src/system.cpp.i:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/system.cpp.i
+.PHONY : src/system.cpp.i
 
-test/utest_rp_a_star_search.s: test/utest_rp_a_star_search.cpp.s
+src/system.s: src/system.cpp.s
 
-.PHONY : test/utest_rp_a_star_search.s
+.PHONY : src/system.s
 
 # target to generate assembly for a file
-test/utest_rp_a_star_search.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test/utest_rp_a_star_search.cpp.s
-.PHONY : test/utest_rp_a_star_search.cpp.s
+src/system.cpp.s:
+	$(MAKE) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/system.cpp.s
+.PHONY : src/system.cpp.s
 
 # Help Target
 help:
@@ -437,38 +318,30 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/strip"
-	@echo "... install/local"
-	@echo "... install"
-	@echo "... list_install_components"
-	@echo "... route_planner"
-	@echo "... test"
-	@echo "... OSM_A_star_search"
-	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... pugixml"
-	@echo "... gmock_main"
-	@echo "... gmock"
-	@echo "... gtest_main"
-	@echo "... gtest"
+	@echo "... monitor"
+	@echo "... edit_cache"
+	@echo "... src/format.o"
+	@echo "... src/format.i"
+	@echo "... src/format.s"
+	@echo "... src/linux_parser.o"
+	@echo "... src/linux_parser.i"
+	@echo "... src/linux_parser.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/model.o"
-	@echo "... src/model.i"
-	@echo "... src/model.s"
-	@echo "... src/render.o"
-	@echo "... src/render.i"
-	@echo "... src/render.s"
-	@echo "... src/route_model.o"
-	@echo "... src/route_model.i"
-	@echo "... src/route_model.s"
-	@echo "... src/route_planner.o"
-	@echo "... src/route_planner.i"
-	@echo "... src/route_planner.s"
-	@echo "... test/utest_rp_a_star_search.o"
-	@echo "... test/utest_rp_a_star_search.i"
-	@echo "... test/utest_rp_a_star_search.s"
+	@echo "... src/ncurses_display.o"
+	@echo "... src/ncurses_display.i"
+	@echo "... src/ncurses_display.s"
+	@echo "... src/process.o"
+	@echo "... src/process.i"
+	@echo "... src/process.s"
+	@echo "... src/processor.o"
+	@echo "... src/processor.i"
+	@echo "... src/processor.s"
+	@echo "... src/system.o"
+	@echo "... src/system.i"
+	@echo "... src/system.s"
 .PHONY : help
 
 
