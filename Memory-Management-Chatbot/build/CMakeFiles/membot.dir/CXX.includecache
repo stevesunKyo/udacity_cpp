@@ -6,6 +6,24 @@
 
 #IncludeRegexTransform: 
 
+/home/workspace/CppND-Memory-Management-Chatbot/src/chatbot.cpp
+iostream
+-
+random
+-
+algorithm
+-
+ctime
+-
+chatlogic.h
+/home/workspace/CppND-Memory-Management-Chatbot/src/chatlogic.h
+graphnode.h
+/home/workspace/CppND-Memory-Management-Chatbot/src/graphnode.h
+graphedge.h
+/home/workspace/CppND-Memory-Management-Chatbot/src/graphedge.h
+chatbot.h
+/home/workspace/CppND-Memory-Management-Chatbot/src/chatbot.h
+
 /home/workspace/CppND-Memory-Management-Chatbot/src/chatbot.h
 wx/bitmap.h
 -
@@ -51,12 +69,26 @@ chatgui.h
 /home/workspace/CppND-Memory-Management-Chatbot/src/chatgui.h
 memory
 -
+chatbot.h
+/home/workspace/CppND-Memory-Management-Chatbot/src/chatbot.h
+
+/home/workspace/CppND-Memory-Management-Chatbot/src/graphedge.cpp
+graphnode.h
+/home/workspace/CppND-Memory-Management-Chatbot/src/graphnode.h
+graphedge.h
+/home/workspace/CppND-Memory-Management-Chatbot/src/graphedge.h
 
 /home/workspace/CppND-Memory-Management-Chatbot/src/graphedge.h
 vector
 -
 string
 -
+
+/home/workspace/CppND-Memory-Management-Chatbot/src/graphnode.cpp
+graphedge.h
+/home/workspace/CppND-Memory-Management-Chatbot/src/graphedge.h
+graphnode.h
+/home/workspace/CppND-Memory-Management-Chatbot/src/graphnode.h
 
 /home/workspace/CppND-Memory-Management-Chatbot/src/graphnode.h
 vector
@@ -65,6 +97,8 @@ string
 -
 chatbot.h
 /home/workspace/CppND-Memory-Management-Chatbot/src/chatbot.h
+memory
+-
 
 /usr/include/wx-3.0/wx/accel.h
 wx/defs.h
