@@ -19,7 +19,9 @@ private:
 
     // data handles (owned)
     std::vector<std::unique_ptr<GraphNode>> _nodes;
-    std::vector<std::unique_ptr<GraphEdge>> _edges;
+    //std::vector<std::unique_ptr<GraphEdge>> _edges;    
+    // removed. 
+    
     
     //std::vector<GraphNode *> _nodes;
     //std::vector<GraphEdge *> _edges;
@@ -29,9 +31,9 @@ private:
 
     // data handles (not owned)
     GraphNode *_currentNode;
-    ChatBot _chatBot;
+    ChatBot *_chatBot;
     ChatBotPanelDialog *_panelDialog;
-
+   
     // proprietary type definitions
     typedef std::vector<std::pair<std::string, std::string>> tokenlist;
 
@@ -46,7 +48,7 @@ public:
 
     // getter / setter
     void SetPanelDialogHandle(ChatBotPanelDialog *panelDialog);
-    void SetChatbotHandle(ChatBot chatbot);
+    void SetChatbotHandle(ChatBot *chatbot);
 
     // proprietary functions
     void LoadAnswerGraphFromFile(std::string filename);

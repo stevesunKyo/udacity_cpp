@@ -158,12 +158,11 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
                             // create new edge
                             //GraphEdge *edge = new GraphEdge(id);
-                            auto edge = std::make_unique<GraphEdge>(id);
+                            std::unique_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id);
                           
                           
                             edge->SetChildNode((*childNode).get());
                             edge->SetParentNode((*parentNode).get());
-                            _edges.emplace_back(edge.get());
 
                             // find all keywords for current node
                             AddAllTokensToElement("KEYWORD", tokens, *edge);
@@ -217,12 +216,22 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
     // add chatbot to graph root node
   
-    // Task5: I tried to do to these modifications but it gets a segmentation fault and it is not working
-    ChatBot chat = ChatBot("../images/chatbot.png");
-    chat.SetChatLogicHandle(this);
-    _chatBot = std::move(chat); 
-    _chatBot.SetRootNode(rootNode); 
-    rootNode->MoveChatbotHere(_chatBot);
+// create instance of chatbot
+// create instance of chatbot
+_chatBot = new ChatBot("../images/chatbot.png");
+
+// add pointer to chatlogic so that chatbot answers can be passed on to the GUI
+_chatBot->SetChatLogicHandle(this);
+
+// add chatbot to graph root node
+_chatBot->SetRootNode(rootNode);
+
+// pass rvalue of unique_ptr to ChatBot instance to the root GraphNode  
+rootNode->MoveChatbotHere(std::move(*_chatBot));
+// in the code review the reviewer used "std::unique_ptr<ChatBot>(_chatbot)"
+// However the MoveChatbothere need a input of type ChatBot
+// so I modified the input into *_chatBot. But it still get segmentation fault.
+  
   
     //// EOF STUDENT CODE
 }
@@ -232,14 +241,16 @@ void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog)
     _panelDialog = panelDialog;
 }
 
-void ChatLogic::SetChatbotHandle(ChatBot chatbot)
+void ChatLogic::SetChatbotHandle(ChatBot *chatbot)
 {
-    _chatBot = std::move(chatbot);
+    (this->_chatBot) = std::move(chatbot);
+  // there are two _chatbot. one is a pointer in chatlogic and one is not a pointer, in graphnode.cpp.
+  
 }
 
 void ChatLogic::SendMessageToChatbot(std::string message)
 {
-    _chatBot.ReceiveMessageFromUser(message);
+    (this->_chatBot)->ReceiveMessageFromUser(message);
 }
 
 void ChatLogic::SendMessageToUser(std::string message)
@@ -249,5 +260,5 @@ void ChatLogic::SendMessageToUser(std::string message)
 
 wxBitmap *ChatLogic::GetImageFromChatbot()
 {
-    return _chatBot.GetImageHandle();
+    return (this->_chatBot)->GetImageHandle();
 }
