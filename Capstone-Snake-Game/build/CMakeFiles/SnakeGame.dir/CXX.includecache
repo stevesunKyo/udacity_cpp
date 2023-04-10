@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+/home/workspace/CppND-Capstone-Snake-Game/src/Asearch.h
+
 /home/workspace/CppND-Capstone-Snake-Game/src/controller.h
 snake.h
 /home/workspace/CppND-Capstone-Snake-Game/src/snake.h
@@ -23,6 +25,8 @@ vector
 -
 random
 -
+algorithm
+-
 SDL.h
 /home/workspace/CppND-Capstone-Snake-Game/src/SDL.h
 controller.h
@@ -31,6 +35,8 @@ renderer.h
 /home/workspace/CppND-Capstone-Snake-Game/src/renderer.h
 snake.h
 /home/workspace/CppND-Capstone-Snake-Game/src/snake.h
+Asearch.h
+/home/workspace/CppND-Capstone-Snake-Game/src/Asearch.h
 
 /home/workspace/CppND-Capstone-Snake-Game/src/renderer.h
 vector
@@ -45,6 +51,10 @@ vector
 -
 SDL.h
 /home/workspace/CppND-Capstone-Snake-Game/src/SDL.h
+math.h
+-
+algorithm
+-
 
 /usr/include/SDL2/SDL.h
 SDL_main.h

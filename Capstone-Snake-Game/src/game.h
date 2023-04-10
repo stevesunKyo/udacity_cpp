@@ -3,10 +3,12 @@
 
 #include <vector>
 #include <random>
+#include <algorithm>
 #include "SDL.h"
 #include "controller.h"
 #include "renderer.h"
 #include "snake.h"
+#include "Asearch.h"
 
 using std::vector;
 
@@ -18,11 +20,11 @@ class Game {
   int GetScore() const;
   int GetSize() const;
   int food_number = 0; // current food number
-  
+  vector<Direction> search_directions(); // search the directions should walk for a AI snake;
   
  private:
   Snake snake;
-  SDL_Point food;
+  AISnake ai01;
   vector<SDL_Point> food_list;
   
   std::random_device dev;
