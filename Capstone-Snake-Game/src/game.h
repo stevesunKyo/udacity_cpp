@@ -1,14 +1,12 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <vector>
 #include <random>
-#include <algorithm>
 #include "SDL.h"
 #include "controller.h"
 #include "renderer.h"
 #include "snake.h"
-#include "Asearch.h"
+#include <vector>
 
 using std::vector;
 
@@ -19,13 +17,14 @@ class Game {
            std::size_t target_frame_duration);
   int GetScore() const;
   int GetSize() const;
-  int food_number = 0; // current food number
-  vector<Direction> search_directions(); // search the directions should walk for a AI snake;
+  int food_number = 0;
   
  private:
   Snake snake;
-  AISnake ai01;
+  //SDL_Point food;
   vector<SDL_Point> food_list;
+  SDL_Point redfood;
+  SDL_Point greenfood;
   
   std::random_device dev;
   std::mt19937 engine;
@@ -33,8 +32,10 @@ class Game {
   std::uniform_int_distribution<int> random_h;
 
   int score{0};
-  int maximum_food_number = 10; 
+  int maximum_food_number = 10;
   void PlaceFood();
+  void PlaceGreenFood();
+  void PlaceRedFood();
   void Update();
 };
 

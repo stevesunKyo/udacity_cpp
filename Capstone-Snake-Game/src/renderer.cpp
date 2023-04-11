@@ -2,8 +2,6 @@
 #include <iostream>
 #include <string>
 
-
-
 Renderer::Renderer(const std::size_t screen_width,
                    const std::size_t screen_height,
                    const std::size_t grid_width, const std::size_t grid_height)
@@ -40,7 +38,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Snake const snake, AISnake ai01, vector<SDL_Point> const &food_list) {
+void Renderer::Render(Snake const snake, vector<SDL_Point> const &food_list, SDL_Point const &redfood, SDL_Point const &greenfood) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
@@ -56,7 +54,21 @@ void Renderer::Render(Snake const snake, AISnake ai01, vector<SDL_Point> const &
   block.x = food_list[i].x * block.w;
   block.y = food_list[i].y * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
-  }
+   }
+  
+  // Render red food
+  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+  block.x = redfood.x * block.w;
+  block.y = redfood.y * block.h;
+  SDL_RenderFillRect(sdl_renderer, &block);
+  
+  // Render green food
+  SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
+  block.x = greenfood.x * block.w;
+  block.y = greenfood.y * block.h;
+  SDL_RenderFillRect(sdl_renderer, &block);  
+  
+    
   // Render snake's body
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
   for (SDL_Point const &point : snake.body) {
@@ -74,27 +86,6 @@ void Renderer::Render(Snake const snake, AISnake ai01, vector<SDL_Point> const &
     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
   }
   SDL_RenderFillRect(sdl_renderer, &block);
-
-  ////////////////////////
-  // Render AI snake's body
-  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-  for (SDL_Point const &point : ai01.body) {
-    block.x = point.x * block.w;
-    block.y = point.y * block.h;
-    SDL_RenderFillRect(sdl_renderer, &block);
-  }
-
-  // Render AI snake's head
-  block.x = static_cast<int>(ai01.head_x) * block.w;
-  block.y = static_cast<int>(ai01.head_y) * block.h;
-  if (ai01.alive) {
-    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x7A, 0xCC, 0xFF);
-  } else {
-    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
-  }
-  SDL_RenderFillRect(sdl_renderer, &block);
- 
-  
 
   // Update Screen
   SDL_RenderPresent(sdl_renderer);

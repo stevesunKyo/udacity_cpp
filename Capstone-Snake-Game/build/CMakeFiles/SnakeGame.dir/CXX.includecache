@@ -6,26 +6,12 @@
 
 #IncludeRegexTransform: 
 
-/home/workspace/CppND-Capstone-Snake-Game/src/Asearch.h
-
 /home/workspace/CppND-Capstone-Snake-Game/src/controller.h
 snake.h
 /home/workspace/CppND-Capstone-Snake-Game/src/snake.h
 
-/home/workspace/CppND-Capstone-Snake-Game/src/game.cpp
-game.h
 /home/workspace/CppND-Capstone-Snake-Game/src/game.h
-iostream
--
-SDL.h
-/home/workspace/CppND-Capstone-Snake-Game/src/SDL.h
-
-/home/workspace/CppND-Capstone-Snake-Game/src/game.h
-vector
--
 random
--
-algorithm
 -
 SDL.h
 /home/workspace/CppND-Capstone-Snake-Game/src/SDL.h
@@ -35,8 +21,22 @@ renderer.h
 /home/workspace/CppND-Capstone-Snake-Game/src/renderer.h
 snake.h
 /home/workspace/CppND-Capstone-Snake-Game/src/snake.h
-Asearch.h
-/home/workspace/CppND-Capstone-Snake-Game/src/Asearch.h
+vector
+-
+
+/home/workspace/CppND-Capstone-Snake-Game/src/main.cpp
+iostream
+-
+controller.h
+/home/workspace/CppND-Capstone-Snake-Game/src/controller.h
+game.h
+/home/workspace/CppND-Capstone-Snake-Game/src/game.h
+renderer.h
+/home/workspace/CppND-Capstone-Snake-Game/src/renderer.h
+string
+-
+fstream
+-
 
 /home/workspace/CppND-Capstone-Snake-Game/src/renderer.h
 vector
@@ -51,10 +51,6 @@ vector
 -
 SDL.h
 /home/workspace/CppND-Capstone-Snake-Game/src/SDL.h
-math.h
--
-algorithm
--
 
 /usr/include/SDL2/SDL.h
 SDL_main.h

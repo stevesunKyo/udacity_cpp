@@ -1,0 +1,3 @@
+PlayerName: Steve
+Score: 4
+Size: 5

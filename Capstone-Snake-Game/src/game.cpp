@@ -2,14 +2,13 @@
 #include <iostream>
 #include "SDL.h"
 
-
-Game::Game(std::size_t grid_width, std::size_t grid_height): snake(grid_width, grid_height),
-	  ai01(grid_width, grid_height), 
-     ai02(grid_width, grid_height),
-     engine(dev()),
-     random_w(0, static_cast<int>(grid_width - 1)),
-     random_h(0, static_cast<int>(grid_height - 1)) {PlaceFood();}
-
+Game::Game(std::size_t grid_width, std::size_t grid_height)
+    : snake(grid_width, grid_height),
+      engine(dev()),
+      random_w(0, static_cast<int>(grid_width - 1)),
+      random_h(0, static_cast<int>(grid_height - 1)) {
+  PlaceFood();
+}
 
 void Game::Run(Controller const &controller, Renderer &renderer,
                std::size_t target_frame_duration) {
@@ -19,26 +18,24 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   Uint32 frame_duration;
   int frame_count = 0;
   bool running = true;
+
+  PlaceGreenFood();
+  PlaceRedFood(); // initialize green and red foods.
+  
   while (running) {
     frame_start = SDL_GetTicks();
-    
-    // in case of game crash when food_list is empty, add five food with random location when food_list is empty
     if (food_list.size() == 0){
-    for (int i = 0; i < 5; i++){
     SDL_Point food00;
     food00.x = random_w(engine);
     food00.y = random_h(engine);
     food_number ++;
     food_list.push_back(food00);
     }
-    }
     
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake);
-    ai01.set_direction(food_list, snake, ai01);
-
     Update();
-    renderer.Render(snake, ai01, ai02, food_list);
+    renderer.Render(snake, food_list, redfood, greenfood);
 
     frame_end = SDL_GetTicks();
 
@@ -53,7 +50,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
       frame_count = 0;
       title_timestamp = frame_end;
       
-      // place one food after every seconds. However, if there are too much food, do not place it.
+      // place one food after every seconds. However, if there are too much food, do not place it.      
       PlaceFood();
     }
 
@@ -68,13 +65,12 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
 void Game::PlaceFood() {
   int x, y;
-  // modified place food function.
   while (true) {
     x = random_w(engine);
     y = random_h(engine);
     // Check that the location is not occupied by a snake item before placing
     // food.
-    if (!snake.SnakeCell(x, y) || !ai01.SnakeCell(x,y)) {
+    if (!snake.SnakeCell(x, y)) {
       if (food_number < maximum_food_number){
       SDL_Point food1;
       food1.x = x;
@@ -82,52 +78,80 @@ void Game::PlaceFood() {
       food_number ++;
       food_list.push_back(food1);
       return;}
-      
-      else{return;} // do nothing if there are so many foods. 
+      else{return;} // do nothing if there are so many foods.
     }
+  }
+}
+
+void Game::PlaceGreenFood(){
+int x, y;
+  while(true){
+  x = random_w(engine);
+  y = random_h(engine);
+  // Check that the location is not occupied by a snake item before placing food.
+  if (!snake.SnakeCell(x, y)) {
+    greenfood.x = x;
+    greenfood.y = y;
+  	 return;}
+  }
+}
+
+void Game::PlaceRedFood(){
+int x, y;
+  while(true){
+  x = random_w(engine);
+  y = random_h(engine);
+  // Check that the location is not occupied by a snake item before placing food.
+  if (!snake.SnakeCell(x, y)) {
+    redfood.x = x;
+    redfood.y = y;
+  	 return;}
   }
 }
 
 void Game::Update() {
   if (!snake.alive) return;
   snake.Update();
-  ai01.Update();
-  // update the player snake and AI snakes;
+  int new_x = static_cast<int>(snake.head_x);
+  int new_y = static_cast<int>(snake.head_y);
   
-  int player_x = static_cast<int>(snake.head_x);
-  int player_y = static_cast<int>(snake.head_y);
-
-  int ai01_x = static_cast<int>(ai01.head_x);
-  int ai01_y = static_cast<int>(ai01.head_y); 
-  
-  // Check if there's food over here
-  
-  //bool check_ = false;// variable to check whether a food in the list is crashed with a snake's head 
-  int food_num = food_list.size();
-  
-  for (int i = 0; i < food_num; i++){
-    if (food_list[i].x == player_x && food_list[i].y == player_y){
+ int food_num = food_list.size();
+ for (int i = 0; i < food_num; i++){
+if (food_list[i].x == new_x && food_list[i].y == new_y){
     score++;
     food_number --; // this food was eaten.
     // Grow snake and increase speed.
     snake.GrowBody();
-    if (snake.speed < 0.4){
-      snake.speed += 0.02;}
+    if (snake.speed < 0.4){snake.speed += 0.02;}
     food_list[i] = food_list[food_num - 1];
     food_list.pop_back();  // use a faster method to delete "eaten" food. 
-     }
-    
-    // update for AI snake 01
-    if (food_list[i].x == ai01_x && food_list[i].y == ai01_y){
-    food_number --; // this food was eaten.
-    // Grow snake and increase speed.
-    ai01.GrowBody();
-    food_list[i] = food_list[food_num - 1];
-    food_list.pop_back();  // use a faster method to delete "eaten" food. 
-     }
-  
-    
-  }
+    }  
+}
+ 
+ if (greenfood.x == new_x && greenfood.y == new_y){
+    score = score + 5;
+    PlaceGreenFood();
+    snake.GrowBody();
+    snake.speed = snake.speed / 2;
+ }
+ if (redfood.x == new_x && redfood.y == new_y){
+   std::random_device rd;
+   std::mt19937 gen(rd());
+   std::uniform_real_distribution<> dis(0, 1); 
+   float randomnum = dis(gen); 
+   if (randomnum < 0.5){
+    score = score * 2;
+    PlaceRedFood();
+    snake.GrowBody();
+    snake.speed = snake.speed + 0.1;
+   }
+   else {
+   score = score / 2;
+   PlaceRedFood();
+   snake.GrowBody();
+   snake.speed = snake.speed / 2;
+   }
+ }
 }
 
 int Game::GetScore() const { return score; }
